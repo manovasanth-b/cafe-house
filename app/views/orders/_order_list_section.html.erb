@@ -1,0 +1,31 @@
+<% if order_items.size > 0 %>
+  <section class="Section">
+    <div class="row ">
+      <div class="column">
+        <h3  class="Section_Category Green-Text ">Stage: <%= order.order_status %></h3>
+        <p class="Green-Text_Light" style ="margin:5px;font-size: 14px;" >Order Id: <%= order.id %></p>
+      </div>
+      <% if order.order_placed_date != nil %>
+      <div class="column" style="margin-left: auto; margin-right: 20px;">
+        <p  class="Section_Category Green-Text " style="margin:0px;">Order placed on:</p>
+        <p class="Green-Text_Light" style="margin:4px auto; font-size: 14px;"><%= order.order_placed_date.strftime("%m/%d/%Y") %></p>
+      </div>
+      <% end %>
+    </div>
+    <table class="Section_Table">
+      <tr class="Section_MenuItems  ">
+        <td class=" Purple-Text" >Item Name</td>
+        <td class=" Purple-Text">Price</td>
+        <td class=" Purple-Text">Quantity</td>
+      </tr>
+      <% order_items.each do |order_item| %>
+        <tr class="Section_MenuItems  Green-Text_Light">
+          <td> <%= order_item.menu_item_name %></td>
+          <td>: &#8377;<%= order_item.menu_item_price %></td>
+          <td><%= order_item.menu_item_quantity %></td>
+        </tr>
+      <% end %>
+    </table>
+  </section>
+  <br/>
+<% end %>

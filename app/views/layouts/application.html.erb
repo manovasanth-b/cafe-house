@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <title>CafeHouse</title>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="overlay overlay--hidden"></div>
+  <main class="Page_main">
+    <section class ="Header">
+      <a class="Header-title" href="/" >Cafe House</a>
+      <div style="flex: 3"></div>
+      <% if isCafeOwner %>
+        <%= link_to "create-users", view_register_path, class: "Header-signout", data: { method: :get } %>
+      <% end %>
+      <% if current_user && current_user.role == $USER_TYPE_CLERK %>
+          <%= link_to "Open orders", view_clerk_open_orders_path, class: "Header-signout", data: { method: :get } %>
+      <% end %>
+      <% if current_user && current_user.id %>
+        <% if current_user.role == $USER_TYPE_CUSTOMER %>
+          <%= link_to "My orders", view_orders_path, class: "Header-signout", data: { method: :get } %>
+        <% end %>
+        <%= link_to "Sign-out", request_logout_path, class: "Header-signout", data: { confirm: "Do you want to signout?", method: :delete } %>
+      <% end %>
+    </section>
+    <%= yield %>
+  </main>
+</body>
+</html>

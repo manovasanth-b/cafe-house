@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="model_styles.css">
+  </head>
+  <body>
+      <article>
+        <section class ="Section row">
+          <h2 class="Section_Title">Welcome <%= @current_user.first_name %>!</h2>
+          <% if !isCafeOwner %>
+            <div style="margin-left:auto;">
+              <%= form_tag request_create_order_item_path, method: :post do %>
+                <input type="hidden" name="client_cart_items" id="client_cart_items" value ="" />
+                <button type="submit" class="button-small button-yellow" style="flex:">Check Out</button>
+              <% end %>
+            </div>
+          <% end %>
+        </section>
+        <div class="row ">
+          <h2  class="Section_Title Purple-Text">Menu List</h2>
+          <% if isCafeOwner %>
+            <%= form_tag view_create_menu_item_path, method: :GET, :remote => true do %>
+              <button type="submit" class="button-small">Create Menu</button>
+            <% end %>
+          <% end %>
+        </div>
+      </article>
+
+      <% if @menu_category.errors.any? || @menu_item.errors.any? %>
+      <div id="error_explanation">
+          <% @menu_category.errors.full_messages.each do |msg| %>
+            <p class="error_message"><%= msg %></p>
+          <% end %>
+          <% @menu_item.errors.full_messages.each do |msg| %>
+            <p class="error_message"><%= msg %></p>
+          <% end %>
+      </div>
+      <% end %>
+      <% flash.each do |type, msg| %>
+        <% className = type == "Error" ? "error_message" : "success_message" %>
+        <p class=<%= className %>><%= msg %></p>
+      <% end %>
+      <% @menu_categories.each do |menu| %>
+        <%= render partial: "menu_list_section", locals: { menu_category: menu, menu_items: menu.menu_items } %>
+      <% end %>
+      <div id="cart_items_from_db" data-source=<%= get_cart_order_items.to_json %>></div>
+      <div id="modal-window" class="modal modal--hidden">
+        <div class="modal-content">
+        </div>
+      </div>
+  </body>
+</html>

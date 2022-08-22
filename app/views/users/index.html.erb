@@ -1,0 +1,43 @@
+<article>
+  <%= form_tag request_register_path, method: :POST, class: "Section" do %>
+    <h2 class="Section_Title">Welcome!! <% if isCafeOwner %>Create New User<% else %>Register here<% end %> </h2>
+    <% if @user.errors.any? %>
+    <div id="error_explanation">
+        <% @user.errors.full_messages.each do |msg| %>
+          <p class="error_message"><%= msg %></p>
+        <% end %>
+    </div>
+    <% end %>
+    <% flash.each do |type, msg| %>
+      <p class="success_message"><%= msg %></p>
+    <% end %>
+    <% if isCafeOwner %>
+    <div class ="input_box">
+      <%= label_tag(:role, "Select Role", options = { class: "input_box-label" }) %>
+      <%= select_tag(:role, options_for_select([["Owner", $USER_TYPE_OWNER], ["Clerk", $USER_TYPE_CLERK]], params[:role]), { :class => "input_text-select" }) %>
+    </div>
+    <% end %>
+    <div class ="input_box">
+      <%= label_tag(:first_name, "First Name", options = { class: "input_box-label" }) %>
+      <%= text_field_tag("first_name", value = nil, options = { class: "input_text", required: true }) %>
+    </div>
+    <div class ="input_box">
+      <%= label_tag(:last_name, "Last Name", options = { class: "input_box-label" }) %>
+      <%= text_field_tag("last_name", value = nil, options = { class: "input_text" }) %>
+    </div>
+    <div class ="input_box">
+      <%= label_tag(:email, "Email Address", options = { class: "input_box-label" }) %>
+      <%= text_field_tag("email", value = nil, options = { class: "input_text", required: true }) %>
+    </div>
+    <div class ="input_box">
+      <%= label_tag(:password, "Password", options = { class: "input_box-label" }) %>
+      <%= password_field_tag("password", value = nil, options = { class: "input_text", required: true }) %>
+    </div>
+
+    <div class ="input_box">
+      <%= label_tag(:password_confirmation, "Confirm Password", options = { class: "input_box-label" }) %>
+      <%= password_field_tag("password_confirmation", value = nil, options = { class: "input_text", required: true }) %>
+    </div>
+    <button type="submit" ><% if isCafeOwner %>Create<% else %>Register here<% end %></button>
+  <% end %>
+</article>

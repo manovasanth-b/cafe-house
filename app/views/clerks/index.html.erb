@@ -1,0 +1,19 @@
+<article>
+  <section class ="Section">
+    <h2 class="Section_Title">Welcome <%= current_user.first_name %>!</h2>
+  </section>
+    <%= form_tag request_create_menu_item_path, method: :POST, class: "Section", :remote => true do %>
+      <div class ="input_box">
+        <%= text_field_tag("search_term", value = nil, options = { class: "input_text ", placeholder: "Search here..." }) %>
+      </div>
+    <%end%>
+  <table class="Section_Table">
+    <% @users.each do |user|%>
+      <tr class="Section_MenuItems  Purple-Text">
+        <td><%=user.first_name%></td>
+        <td><%=user.email%></td>
+        <td class ="blue-Text pointer"  >login-as(<%=user.first_name%>)</td>
+      </tr>
+    <%end%>
+  </table>
+</article>

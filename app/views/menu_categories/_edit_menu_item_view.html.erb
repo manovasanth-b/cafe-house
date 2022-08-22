@@ -1,0 +1,26 @@
+
+<div class="modal__close-bar">
+  <span onclick ="toggleModal()">X</span>
+</div>
+<%= form_tag request_edit_menu_item_path, method: :POST, class: "Section", :remote => true do %>
+  <p>This Menu Item comes under category- <%=@selected_menu_category_name%></p>
+  <input type="hidden" name="menu_item_id" value ="<%=@selected_menu_item.id%>"/>
+  <div class ="input_box">
+    <%= label_tag(:menu_category_id, "Select Menu Category", options = { class: "input_box-label" }) %>
+    <%= select_tag(:menu_category_id, options_for_select(@menu_categories.map { |menu_cat| [menu_cat.name, menu_cat.id]}, params[:menu_category_id]), { :class => "input_text-select"  }) %>
+  </div>
+  <div class ="input_box">
+    <%= label_tag(:name, "Menu Item Name", options = { class: "input_box-label" }) %>
+    <%= text_field_tag("name", value = @selected_menu_item.name , options = { class: "input_text", required: true }) %>
+  </div>
+  <div class ="input_box">
+    <%= label_tag(:price, "Menu Item Price", options = { class: "input_box-label" }) %>
+    <%= number_field_tag("price", value = @selected_menu_item.price, options = { class: "input_text", required: true }) %>
+  </div>
+  <div class ="input_box">
+    <%= label_tag(:description, "Menu Item Description", options = { class: "input_box-label" }) %>
+    <%= text_area_tag("description", value = @selected_menu_item.description, options = { class: "input_text" }) %>
+  </div>
+  <button type="submit" >Update</button>
+<% end %>
+

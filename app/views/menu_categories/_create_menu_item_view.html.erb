@@ -1,0 +1,30 @@
+<% if isCafeOwner%>
+  <div class="modal__close-bar">
+    <span onclick ="toggleModal()">X</span>
+  </div>
+  <%= form_tag request_create_menu_item_path, method: :POST, class: "Section", :remote => true do %>
+    <% menu_categories_with_others = @menu_categories.map { |menu_cat| [menu_cat.name, menu_cat.id] } %>
+    <% menu_categories_with_others.push(["Others", "Others"]) %>
+    <div class ="input_box">
+      <%= label_tag(:menu_category_id, "Select Menu Category", options = { class: "input_box-label" }) %>
+      <%= select_tag(:menu_category_id, options_for_select(menu_categories_with_others, params[:menu_category_id]), { :class => "input_text-select", :onchange => "onChangeSelectMenuCategoryNameInput(event)" }) %>
+    </div>
+    <div class ="input_box">
+      <%= label_tag(:new_menu_category_name, "Menu Category Name (Required)", options = { class: "input_box-label hideElement", id: "menu_category_input_label" }) %>
+      <%= text_field_tag("new_menu_category_name", value = nil, options = { class: "input_text hideElement" }) %>
+    </div>
+    <div class ="input_box">
+      <%= label_tag(:name, "Menu Item Name", options = { class: "input_box-label" }) %>
+      <%= text_field_tag("name", value = nil, options = { class: "input_text", required: true }) %>
+    </div>
+    <div class ="input_box">
+      <%= label_tag(:price, "Menu Item Price", options = { class: "input_box-label" }) %>
+      <%= number_field_tag("price", value = nil, options = { class: "input_text", required: true }) %>
+    </div>
+    <div class ="input_box">
+      <%= label_tag(:description, "Menu Item Description", options = { class: "input_box-label" }) %>
+      <%= text_area_tag("description", value = nil, options = { class: "input_text" }) %>
+    </div>
+    <button type="submit" >Create</button>
+  <% end %>
+<% end %>
