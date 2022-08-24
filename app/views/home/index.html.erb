@@ -4,15 +4,15 @@
   <body>
       <article>
         <section class ="Section">
-          <h2 class="Section_Title">New to the Cafe House?</h2>
+          <h2 class="Section_Title"><%= t("home.new_user") %></h2>
           <div>
-            <a class="Section_Link"href=<%=view_register_path%> >Sign-up for a new account</a>
+            <a class="Section_Link"href=<%= view_register_path %> ><%= t("home.sign_up") %></a>
           </div>
         </section>
         <section class ="Section">
-          <h2 class="Section_Title">Already have a account?</h2>
+          <h2 class="Section_Title"><%= t("home.already_have_account") %></h2>
           <div>
-            <a class="Section_Link"href=<%= view_login_path %>  >Sign-in</a>
+            <a class="Section_Link"href=<%= view_login_path %>  ><%= t("home.sign_in") %></a>
           </div>
         </section>
       </article>

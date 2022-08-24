@@ -26,6 +26,7 @@ class MenuItemsController < ApplicationController
     if isCafeOwner
       begin
         @menu_item = MenuItem.find(params[:menu_item_id])
+        menu_category_id = @menu_item.menu_category_id
         if @menu_item.destroy
           flash[:notice] = "Menu Item Deleted successfully!"
         else

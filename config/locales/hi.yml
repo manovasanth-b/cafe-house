@@ -1,0 +1,6 @@
+hi:
+  header:
+    name: "Cafe House"
+    sign_out: "Sign-out"
+    create_users: "Create-users"
+    my_orders: "My Orders"

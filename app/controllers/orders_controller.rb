@@ -19,11 +19,11 @@ class OrdersController < ApplicationController
         menu_ids = client_cart_items.keys
         order_id = nil
 
-        if get_cart_orders && get_cart_orders.first
-          order_id = get_cart_orders.first.id
+        if get_cart_orders_current_user && get_cart_orders_current_user.first
+          order_id = get_cart_orders_current_user.first.id
         else
-          if current_user.orders.create(:order_status => $ORDER_STAGES[0]) && get_cart_orders && get_cart_orders.first
-            order_id = get_cart_orders.first.id
+          if current_user.orders.create(:order_status => $ORDER_STAGES[0]) && get_cart_orders_current_user && get_cart_orders_current_user.first
+            order_id = get_cart_orders_current_user.first.id
           end
         end
 
@@ -108,6 +108,7 @@ class OrdersController < ApplicationController
         if !order.save
           flash[:Error] = "Error: Not able to update the order.. Please try again!"
         else
+          SendUserEmailJob.perform_later(params)
           flash[:notice] = "Order Status has been successfully updated!"
         end
       end

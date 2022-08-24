@@ -1,7 +1,8 @@
+require "sidekiq/web"
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
+  mount Sidekiq::Web => "/sidekiq"
   # sign/signout routes
   get "sessions" => "user_sessions#new", as: :view_login
   post "sessions/login" => "user_sessions#create", as: :request_login
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
   post "menu/item/new" => "menu_items#create", as: :request_create_menu_item
   post "menu/item/update" => "menu_items#update_menu_item", as: :request_edit_menu_item
 
+  put "menu/search" => "menu_categories#search_menu_item", as: :request_search_menu_item
   post "menu/category/edit" => "menu_categories#edit_menu_category", as: :request_edit_menu_category
   delete "menu/category/delete" => "menu_categories#destroy", as: :request_delete_menu_category
   delete "menu/item/delete" => "menu_items#delete_menu_item", as: :request_delete_menu_item
@@ -35,6 +37,10 @@ Rails.application.routes.draw do
   # check out routes
   get "checkout/view" => "check_out#index", as: :view_check_out
   post "order/place" => "check_out#place_order", as: :request_change_order_status
+
+  # Email Routes
+
+  get "send/email" => "clerks#email_sender", as: :request_send_email_to_user
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

@@ -24,6 +24,7 @@ class UserSessionsController < ApplicationController
 
   def destroy
     current_user_session.destroy
+    Rails.cache.clear()
     redirect_to view_welcome_path
   end
 

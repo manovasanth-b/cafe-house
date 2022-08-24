@@ -20,4 +20,25 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  header:
+    name: "Cafe House"
+    sign_out: "Sign-out"
+    create_users: "Create-users"
+    my_orders: "My Orders"
+    open_orders: "Open orders"
+    welcome: "Welcome"
+  feature:
+    create_new_user: "Create New User"
+    register_here: "Register Here"
+    create: "Create"
+  home:
+    new_user: "New to the Cafe House?"
+    sign_up: "Sign-up for a new account"
+    already_have_account: "Already have a account?"
+    sign_in: "Sign-in"
+  products:
+    menu_list: "Menu List"
+    search: "search"
+    search_placeholder: "Search here.."
+    check_out: "Check Out"
+    add_to_cart: "Add to cart"
