@@ -187,3 +187,11 @@ a{
 .margin_left-auto{
   margin-left: auto;
 }
+
+.footer{
+  margin-top: 20%;
+  padding:10px;
+  justify-content: center;
+  gap: 10px;
+  border-top: 2px solid rgb(112, 12, 112);
+}

@@ -5,12 +5,9 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
   protect_from_forgery with: :null_session
-  # skip_before_action :verify_authenticity_token
   $USER_TYPE_CUSTOMER = 3
   $USER_TYPE_CLERK = 2
   $USER_TYPE_OWNER = 1
-
-  @@cart_need_to_be_updated = []
 
   $ORDER_STAGES = ["In Cart", "Pending Request", "Confirmed", "Being Prepared", "Dispatched", "Delivered"]
 
